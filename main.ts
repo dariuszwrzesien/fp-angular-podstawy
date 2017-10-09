@@ -1,5 +1,19 @@
-import { Test } from './test';
+import { Cart } from './cart';
 
-let test = new Test('Alojzy', {city: 'Ruda', country: 'Silesia'});
-console.log(test.hello());
+let cart = new Cart();
+cart.addProduct({
+    id:1,
+    name: 'p1',
+    description: 'sdfdsfsdfsdfsdfds',
+    price: 2.3
+});
+cart.addProduct({
+    id:2,
+    name: 'p2',
+    description: 'sdfdsfsdfsdfsdfds',
+    price: 5.3
+});
+
+console.log(cart.getAllProducts());
+console.log(cart.totalPrice);
 
