@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ProductService {
@@ -25,10 +27,17 @@ export class ProductService {
     price: 4.5
   }];
 
-  getAllProducts(): Product[] {
-    return this.products;
+  constructor( private http: HttpClient ){
+
   }
-  getProductsByName(name: string): Product[] {
-    return this.products.filter(p => p.name.includes(name));
+
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products');
+  }
+  getProductsByName(name: string): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products',
+      {
+        params: new HttpParams().set("name_like", name)
+      });
   }
 }

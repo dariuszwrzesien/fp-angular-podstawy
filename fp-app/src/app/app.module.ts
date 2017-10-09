@@ -7,7 +7,12 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductListItemComponent } from './product/product-list-item/product-list-item.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from './shared/product.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { NavigationComponent } from './navigation/navigation.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,11 +20,16 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ContactComponent,
     ProductListComponent,
-    ProductListItemComponent
+    ProductListItemComponent,
+    NavigationComponent,
+    ProductEditComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

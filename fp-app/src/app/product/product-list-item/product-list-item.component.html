@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    Name: {{product.name}} ({{product.price | currency:'USD':true}})
+    <strong>{{product.name}}</strong> ({{product.price | currency:'USD':true}})
     <button class="btn btn-primary pull-right"
             (click)="expand(product.id)">
       <i class="fa" [ngClass]="{'fa-arrow-circle-up': expandedId !== product.id,
@@ -8,6 +8,7 @@
     </button>
     <button class="btn btn-danger pull-right"
             (click)="sellProduct(product)">Sell</button>
+    <a [routerLink]="['/products', product.id]">Edit</a>
   </div>
 <div class="card-body" *ngIf="expandedId === product.id">{{product.description}}</div>
 </div>

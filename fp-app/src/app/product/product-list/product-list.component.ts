@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../../shared/product.service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/switchMap';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-product-list',
@@ -8,13 +13,16 @@ import { ProductService } from '../../shared/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
+  private searchText = new BehaviorSubject<string>('');
+  products: Observable<Product[]>;
   expandedId: number;
 
   constructor(private productService: ProductService){}
 
   ngOnInit(){
-    this.products =this.productService.getAllProducts();
+    this.products = this.searchText
+      .debounceTime(300)
+      .switchMap(txt => this.productService.getProductsByName(txt));
   }
 
   handleProductSell(sellProduct: Product) {
@@ -26,6 +34,6 @@ export class ProductListComponent implements OnInit {
   }
 
   searchProduct(searchString: string) {
-    this.products = this.productService.getProductsByName(searchString)
+    this.searchText.next(searchString);
   }
 }
