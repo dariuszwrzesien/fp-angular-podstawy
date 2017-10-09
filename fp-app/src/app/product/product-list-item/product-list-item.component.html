@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    Name: {{product.name}} ({{product.price | currency:'USD':true}})
+    <button class="btn btn-primary pull-right"
+            (click)="expand(product.id)">
+      <i class="fa" [ngClass]="{'fa-arrow-circle-up': expandedId !== product.id,
+                   'fa-arrow-circle-down': expandedId === product.id}"></i>
+    </button>
+    <button class="btn btn-danger pull-right"
+            (click)="sellProduct(product)">Sell</button>
+  </div>
+<div class="card-body" *ngIf="expandedId === product.id">{{product.description}}</div>
+</div>
