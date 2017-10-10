@@ -34,10 +34,24 @@ export class ProductService {
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>('http://localhost:3000/products');
   }
+
   getProductsByName(name: string): Observable<Product[]> {
     return this.http.get<Product[]>('http://localhost:3000/products',
       {
         params: new HttpParams().set("name_like", name)
       });
+  }
+
+  getById(id: number): Observable<Product> {
+    return this.http.get<Product>('http://localhost:3000/products/' + id);
+  }
+
+  addProduct(product: Product) {
+    return this.http.post<any>('http://localhost:3000/products', product);
+  }
+
+  updateProduct(product: Product) {
+    return this.http
+      .put<any>('http://localhost:3000/products/' + product.id, product);
   }
 }

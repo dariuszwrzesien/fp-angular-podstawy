@@ -3,6 +3,8 @@
     <label for="search-box" class="mr-1">Search product: </label>
     <input #searchBox id="search-box" (keyup)="searchProduct(searchBox.value)" />
   </form>
+  <a class="btn btn-primary mt-1 pull-right" routerLink="/products/add">Add Product</a>
+
 </nav>
 
 <app-product-list-item *ngFor="let product of products | async"

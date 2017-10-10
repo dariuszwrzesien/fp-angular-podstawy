@@ -1,0 +1,26 @@
+<div class="card mt-3">
+  <form (ngSubmit)="onSubmit(productForm.value)" [formGroup]="productForm" novalidate>
+    <div class="form-group col-md-6">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name"
+             formControlName="name"
+             placeholder="Product name"
+             [class.is-invalid]="productForm.controls.name.errors && productForm.controls.name.dirty">
+    </div>
+    <div class="form-group col-md-3" >
+      <label for="price">Price</label>
+      <input type="number"
+             formControlName="price"
+             class="form-control" name="price" id="price"
+             [class.is-invalid]="productForm.controls.price.errors && productForm.controls.price.dirty">
+    </div>
+    <div class="form-group col-md-12">
+      <label for="description">Description</label>
+      <textarea class="form-control"
+                formControlName="description"
+                name="description" id="description" rows="5"
+                [class.is-invalid]="productForm.controls.description.errors && productForm.controls.description.dirty"></textarea>
+    </div>
+    <button type="submit"  class="btn btn-primary">Save</button>
+  </form>
+</div>

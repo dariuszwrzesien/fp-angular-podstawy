@@ -11,8 +11,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { NavigationComponent } from './navigation/navigation.component';
-import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductFormComponent } from './product/product-form/product-form.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { ProductAddComponent } from './product/product-add/product-add.component';
+import { FeedbackService } from './shared/feedback.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     ProductListComponent,
     ProductListItemComponent,
     NavigationComponent,
-    ProductEditComponent
+    ProductFormComponent,
+    ProductEditComponent,
+    ProductAddComponent
   ],
   imports: [
     HttpClientModule,
@@ -31,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot(routes),
     ReactiveFormsModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
