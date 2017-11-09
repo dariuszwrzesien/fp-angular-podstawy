@@ -1,12 +1,3 @@
-<nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" #searchInput
-           type="text" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0"
-            (click)="searchProduct(searchInput.value)">Search</button>
-  </form>
-</nav>
-
 <app-product-list-item *ngFor="let product of products"
                        (onSellProduct)="handleProductSell($event)"
                        (onExpandProduct)="handleExpand($event)"

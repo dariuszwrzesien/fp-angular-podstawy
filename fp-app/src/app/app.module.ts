@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductListItemComponent } from './product/product-list-item/product-list-item.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
-import { ProductService } from './shared/product.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule
   ],
-  providers: [ProductService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
-import { ProductService } from '../../shared/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,13 +7,32 @@ import { ProductService } from '../../shared/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [{
+    id: 1,
+    name: 'Product 1',
+    description: 'blablabla asdasdasd',
+    price: 1.5
+  },{
+    id: 2,
+    name: 'Product 2',
+    description: 'blablabla asdasdasd',
+    price: 2
+  },{
+    id: 3,
+    name: 'Product 3',
+    description: 'blablabla asdasdasd',
+    price: 3.5
+  },{
+    id: 4,
+    name: 'Product 4',
+    description: 'blablabla asdasdasd',
+    price: 4.5
+  }];
   expandedId: number;
 
-  constructor(private productService: ProductService){}
+  constructor(){}
 
   ngOnInit(){
-    this.products =this.productService.getAllProducts();
   }
 
   handleProductSell(sellProduct: Product) {
@@ -25,7 +43,4 @@ export class ProductListComponent implements OnInit {
     this.expandedId = id;
   }
 
-  searchProduct(searchString: string) {
-    this.products = this.productService.getProductsByName(searchString)
-  }
 }
