@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import { Product } from '../../models/product';
 
 @Component({
@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
+      enableDescription: true,
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       price: ['', [Validators.required, this.priceRangeValidator]]
     });
@@ -41,8 +42,24 @@ export class ProductFormComponent implements OnInit {
         price: this.product.price
       });
     }
+
+    // zaleznosci miedzy polami w ReactiveForms najprosciej ogarniac właśnie subskrybcją do zmian w formularzu lub
+    // jak w tym przypadku do konkretnego pola
+    this.productForm.controls['enableDescription'].valueChanges.subscribe( (enableDescription) => {
+      this.enableFormField(enableDescription, 'description');
+    })
   }
+
   private priceRangeValidator(control: AbstractControl): {[key: string]: any} {
       return control.value < 0 || control.value > 1000 ? { 'priceOutOfRange': true } : null;
+  }
+
+  // każdy formGroup jak i kontrolka udostępniają metody disable i enable.
+  // trzeba jednak pamietac ze disable wyrzuca wartosc z danych formularza (mozna je wydostac z danych Raw)
+  // Opcja onlySelf jest ustawiona na true - powoduje to sprawdzenie jedynie zmiany tego pola a nie calego formularza.
+  // Z tej metody mozna zrobic dyrektywe lub serwis :) umiescilem tu dla widocznosci przykladu
+  private enableFormField(condidtion: boolean, destinationFieldName) {
+    condidtion ? this.productForm.get(destinationFieldName).enable({onlySelf: true})
+      : this.productForm.get(destinationFieldName).disable({onlySelf: true});
   }
 }

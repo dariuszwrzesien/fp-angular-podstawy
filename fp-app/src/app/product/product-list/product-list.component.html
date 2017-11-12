@@ -9,6 +9,5 @@
 
 <app-product-list-item *ngFor="let product of products | async"
                        (onSellProduct)="handleProductSell($event)"
-                       (onExpandProduct)="handleExpand($event)"
-                       [expandedId]="expandedId"
+                       [(expandedId)]="expandedId"
                        [product]="product"></app-product-list-item>

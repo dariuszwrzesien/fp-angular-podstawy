@@ -29,10 +29,6 @@ export class ProductListComponent implements OnInit {
     alert(sellProduct.name);
   }
 
-  handleExpand(id: number) {
-    this.expandedId = id;
-  }
-
   searchProduct(searchString: string) {
     this.searchText.next(searchString);
   }

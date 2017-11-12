@@ -15,6 +15,13 @@
              [class.is-invalid]="productForm.controls.price.errors && productForm.controls.price.dirty">
     </div>
     <div class="form-group col-md-12">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" formControlName="enableDescription">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Enable Description</span>
+      </label>
+    </div>
+    <div class="form-group col-md-12">
       <label for="description">Description</label>
       <textarea class="form-control"
                 formControlName="description"

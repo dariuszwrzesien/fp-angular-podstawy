@@ -10,7 +10,11 @@ export class ProductListItemComponent implements OnInit {
 
   @Input() product: Product;
   @Output() onSellProduct = new EventEmitter<Product>();
-  @Output() onExpandProduct = new EventEmitter<number>();
+
+  //'Banana in the box'(two way binding) [(expandedId)]
+  // Musi byc zdefiniowany Input() nazwaAtrybutu
+  // oraz Output() nazwaAtrybutuChange
+  @Output() expandedIdChange = new EventEmitter<number>();
   @Input() expandedId: number;
 
   constructor() { }
@@ -21,7 +25,7 @@ export class ProductListItemComponent implements OnInit {
 
   expand(id: number) {
     const expandedId = this.expandedId === id ? null : id;
-    this.onExpandProduct.emit(expandedId);
+    this.expandedIdChange.emit(expandedId);
   }
 
   sellProduct(sellProduct: Product) {
