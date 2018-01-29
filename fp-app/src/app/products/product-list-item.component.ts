@@ -4,9 +4,10 @@ import {Product} from '../models/Product';
 @Component({
   selector: 'app-product-list-item',
   template: `
-    <p>
-      {{product.name}}
-    </p>
+    <div>{{product.name}}</div>
+    <div *ngIf="product.id === expandedProductId">{{product.description}}</div>
+    <button type="button" class="btn btn-danger"
+            (click)="toggle()">Toggle</button>
     <button type="button" 
             (click)="sellProduct()"
             class="btn btn-primary">Sprzedaj</button>
@@ -16,10 +17,16 @@ import {Product} from '../models/Product';
 export class ProductListItemComponent implements OnInit {
 
   @Input() product: Product;
+  @Input() expandedProductId: number;
+  @Output() expandedProductIdChange = new EventEmitter<number>();
   @Output() productSell = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggle() {
+    this.expandedProductIdChange.emit(this.product.id);
   }
 
   sellProduct() {
