@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductListComponent } from './products/product-list.component';
 import { ProductListItemComponent } from './products/product-list-item.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ProductListItemComponent } from './products/product-list-item.component
     ProductListItemComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule
   ],
   providers: [],

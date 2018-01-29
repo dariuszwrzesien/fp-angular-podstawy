@@ -5,8 +5,11 @@ import {Product} from '../models/Product';
   selector: 'app-product-list-item',
   template: `
     <p>
-      product-list-item works!
+      {{product.name}}
     </p>
+    <button type="button" 
+            (click)="sellProduct()"
+            class="btn btn-primary">Sprzedaj</button>
   `,
   styles: []
 })
@@ -17,6 +20,10 @@ export class ProductListItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  sellProduct() {
+    this.productSell.emit(this.product.name);
   }
 
 }

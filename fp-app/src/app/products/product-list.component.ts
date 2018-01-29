@@ -9,6 +9,7 @@ import {Product} from '../models/Product';
       (productSell)="handleProductSell($event)">
 
     </app-product-list-item>
+    <input class="form-control" [(ngModel)]="product.name"/>
   `,
   styles: []
 })
