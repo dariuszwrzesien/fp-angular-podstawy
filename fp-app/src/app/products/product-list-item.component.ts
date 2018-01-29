@@ -4,7 +4,7 @@ import {Product} from '../models/Product';
 @Component({
   selector: 'app-product-list-item',
   template: `
-    <div>{{product.name}} {{product.price | currency:'USD':'code'}}</div>
+    <div>{{product.name}} {{product.price | vat : 0.23 : false}}</div>
     <div *ngIf="product.id === expandedProductId">{{product.description}}
     <pre>{{product | json}}</pre>
     </div>

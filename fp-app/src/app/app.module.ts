@@ -8,6 +8,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductListComponent } from './products/product-list.component';
 import { ProductListItemComponent } from './products/product-list-item.component';
 import {FormsModule} from '@angular/forms';
+import { VatPipe } from './vat.pipe';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {FormsModule} from '@angular/forms';
     HomeComponent,
     ContactComponent,
     ProductListComponent,
-    ProductListItemComponent
+    ProductListItemComponent,
+    VatPipe
   ],
   imports: [
     FormsModule,
