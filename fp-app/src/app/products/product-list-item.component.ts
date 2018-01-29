@@ -4,8 +4,10 @@ import {Product} from '../models/Product';
 @Component({
   selector: 'app-product-list-item',
   template: `
-    <div>{{product.name}}</div>
-    <div *ngIf="product.id === expandedProductId">{{product.description}}</div>
+    <div>{{product.name}} {{product.price | currency:'USD':'code'}}</div>
+    <div *ngIf="product.id === expandedProductId">{{product.description}}
+    <pre>{{product | json}}</pre>
+    </div>
     <button type="button" class="btn btn-danger"
             (click)="toggle()">      
       Toggle
