@@ -31,7 +31,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.products$.asObservable();
+    return this.http.get<Product[]>('http://localhost:3000/products');
   }
   searchProductByName(name: string) {
     this.products$.next(this.products.filter(p => p.name.includes(name)));
