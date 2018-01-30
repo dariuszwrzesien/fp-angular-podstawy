@@ -34,7 +34,7 @@ export class TestComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     Observable.fromEvent(this.input.nativeElement, 'keyup')
-      .subscribe(e => console.log(e.target.value));
+      .subscribe((e:any) => console.log(e.target.value));
 
     Observable.fromEvent(this.button.nativeElement, 'click')
       .subscribe(() => console.log('click!'));
