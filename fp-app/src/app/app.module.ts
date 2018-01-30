@@ -12,7 +12,13 @@ import { VatPipe } from './vat.pipe';
 import {ProductService} from './product.service';
 import { TestComponent } from './test/test.component';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterModule, Routes} from '@angular/router';
+import { NavigationComponent } from './navigation/navigation.component';
 
+const routes: Routes = [
+  {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'contact', component: ContactComponent}
+];
 
 @NgModule({
   declarations: [
@@ -22,12 +28,14 @@ import {HttpClientModule} from '@angular/common/http';
     ProductListComponent,
     ProductListItemComponent,
     VatPipe,
-    TestComponent
+    TestComponent,
+    NavigationComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

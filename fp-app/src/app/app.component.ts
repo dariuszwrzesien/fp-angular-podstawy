@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <app-product-list></app-product-list>
+  template: `  
+    <app-navigation></app-navigation>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styles: []
 })

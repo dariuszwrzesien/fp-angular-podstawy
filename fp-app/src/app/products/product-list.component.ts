@@ -4,6 +4,7 @@ import {ProductService} from '../product.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-product-list',
@@ -41,6 +42,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts(name).subscribe(
       p => this.products = p
     );
+
   }
 
   ngAfterViewInit() {
