@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Product} from './models/Product';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
@@ -30,11 +30,11 @@ export class ProductService {
   private products$ = new BehaviorSubject<Product[]>(this.products);
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products');
-  }
-  searchProductByName(name: string) {
-    this.products$.next(this.products.filter(p => p.name.includes(name)));
+  getProducts(name: string = ''): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products',
+      {
+        params: new HttpParams().set("name_like", name)
+      });
   }
 
 }
