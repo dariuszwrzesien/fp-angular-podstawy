@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <app-product-list></app-product-list>
+    <app-test></app-test>
   `,
   styles: []
 })
