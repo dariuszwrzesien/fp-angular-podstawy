@@ -29,7 +29,9 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   constructor(private productService: ProductService) {}
   ngOnInit() {
-    this.products = this.productService.getAllProducts();
+    this.productService.getProducts().subscribe(
+      p => this.products = p
+    );
   }
 
   handleProductSell(name: string) {
@@ -37,7 +39,7 @@ export class ProductListComponent implements OnInit {
   }
 
   search(name: string) {
-    this.products = this.productService.searchProductByName(name);
+    this.productService.searchProductByName(name);
   }
 
   ngAfterViewInit() {
@@ -45,7 +47,7 @@ export class ProductListComponent implements OnInit {
       .debounceTime(500)
       .subscribe((e) => {
         console.log(e.target.value);
-      this.products = this.productService
+      this.productService
         .searchProductByName(e.target.value);
     })
   }

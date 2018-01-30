@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Product} from './models/Product';
-import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ProductService {
-  private products$ = new Subject<Product[]>();
   private products: Product[] = [{
     id: 1,
     name: 'prod1',
@@ -27,16 +26,12 @@ export class ProductService {
     price: 4.99,
     description:'descr4'
   }];
-
+  private products$ = new BehaviorSubject<Product[]>(this.products);
   constructor() { }
 
   getProducts(): Observable<Product[]> {
     return this.products$.asObservable();
   }
-  getAllProducts() {
-    this.products$.next(this.products);
-  }
-
   searchProductByName(name: string) {
     this.products$.next(this.products.filter(p => p.name.includes(name)));
   }
