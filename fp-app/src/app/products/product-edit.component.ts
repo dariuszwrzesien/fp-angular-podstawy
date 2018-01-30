@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-product-edit',
   template: `
+    <app-product-form (saveForm)="update($event)"></app-product-form>
     <p>
       Product: {{product$ | async | json}}
     </p>
@@ -23,6 +24,10 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
     this.product$ = this.activatedRoute.params
       .switchMap((params: Params) => this.productService.getProductById(params['id']));
+  }
+
+  update(product: Product) {
+    console.log(product);
   }
 
 }

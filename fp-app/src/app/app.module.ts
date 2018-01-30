@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductListComponent } from './products/product-list.component';
 import { ProductListItemComponent } from './products/product-list-item.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { VatPipe } from './vat.pipe';
 import {ProductService} from './product.service';
 import { TestComponent } from './test/test.component';
@@ -16,6 +16,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProductAddComponent } from './products/product-add.component';
 import { ProductEditComponent } from './products/product-edit.component';
+import { ProductFormComponent } from './products/product-form.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -36,10 +37,12 @@ const routes: Routes = [
     TestComponent,
     NavigationComponent,
     ProductAddComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    ProductFormComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
