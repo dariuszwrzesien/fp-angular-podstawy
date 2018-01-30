@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../models/Product';
+import {ProductService} from '../product.service';
 
 @Component({
   selector: 'app-product-list',
   template: `
+    <div>
+      <input type="text" #searchInput/> 
+      <button type="button" class="btn btn-warning" 
+              (click)="search(searchInput.value)">Szukaj</button>
+    </div>
     <app-product-list-item *ngFor="let product of products"
       [product]="product"
       [(expandedProductId)]="expandedProductId"                     
@@ -16,33 +22,18 @@ import {Product} from '../models/Product';
 export class ProductListComponent implements OnInit {
 
   expandedProductId: number;
-  products: Product[] = [{
-    id: 1,
-    name: 'prod1',
-    price: 1.99,
-    description:'descr1'
-  },{
-    id: 2,
-    name: 'prod2',
-    price: 2.99,
-    description:'descr2'
-  },{
-    id: 3,
-    name: 'prod3',
-    price: 3.99,
-    description:'descr3'
-  },{
-    id: 4,
-    name: 'prod4',
-    price: 4.99,
-    description:'descr4'
-  }];
-
+  products: Product[] = [];
+  constructor(private productService: ProductService) {}
   ngOnInit() {
+    this.products = this.productService.getAllProducts();
   }
 
   handleProductSell(name: string) {
     alert(name);
+  }
+
+  search(name: string) {
+    this.products = this.productService.searchProductByName(name);
   }
 
 
