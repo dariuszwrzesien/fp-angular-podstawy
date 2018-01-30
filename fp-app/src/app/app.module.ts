@@ -14,11 +14,15 @@ import { TestComponent } from './test/test.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ProductAddComponent } from './products/product-add.component';
+import { ProductEditComponent } from './products/product-edit.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'contact', component: ContactComponent},
-  {path: 'products', component: ProductListComponent}
+  {path: 'products', component: ProductListComponent},
+  {path: 'products/add', component: ProductAddComponent},
+  {path: 'products/:id/edit', component: ProductEditComponent}
 ];
 
 @NgModule({
@@ -30,7 +34,9 @@ const routes: Routes = [
     ProductListItemComponent,
     VatPipe,
     TestComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProductAddComponent,
+    ProductEditComponent
   ],
   imports: [
     FormsModule,
