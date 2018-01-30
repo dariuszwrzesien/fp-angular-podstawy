@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Product} from '../models/Product';
 import {ProductService} from '../product.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-product-list',
@@ -21,6 +22,7 @@ import {ProductService} from '../product.service';
 })
 export class ProductListComponent implements OnInit {
 
+  @ViewChild('searchInput') input: ElementRef;
   expandedProductId: number;
   products: Product[] = [];
   constructor(private productService: ProductService) {}
@@ -34,6 +36,12 @@ export class ProductListComponent implements OnInit {
 
   search(name: string) {
     this.products = this.productService.searchProductByName(name);
+  }
+
+  ngAfterViewInit() {
+    Observable.fromEvent(this.input.nativeElement, 'keyup').subscribe((e) => {
+      this.products = this.productService.searchProductByName(e.target.value);
+    })
   }
 
 
