@@ -8,14 +8,15 @@ import 'rxjs/add/operator/debounceTime';
 @Component({
   selector: 'app-product-list',
   template: `
+    <pre>{{product$ | async | json}}</pre>
     <div>
       <input type="text" #searchInput/> 
       <button type="button" class="btn btn-warning" 
               (click)="search(searchInput.value)">Szukaj</button>
     </div>
-    <app-product-list-item *ngFor="let product of products"
+    <app-product-list-item *ngFor="let product of product$ | async"
       [product]="product"
-      [(expandedProductId)]="expandedProductId"                     
+      [(expandedProductId)]="expandedProductId"
       (productSell)="handleProductSell($event)">
 
     </app-product-list-item>
@@ -26,12 +27,10 @@ export class ProductListComponent implements OnInit {
 
   @ViewChild('searchInput') input: ElementRef;
   expandedProductId: number;
-  products: Product[] = [];
+  product$: Observable<Product[]>;
   constructor(private productService: ProductService) {}
   ngOnInit() {
-    this.productService.getProducts().subscribe(
-      p => this.products = p
-    );
+    this.product$ = this.productService.getProducts();
   }
 
   handleProductSell(name: string) {
