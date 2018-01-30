@@ -48,9 +48,9 @@ export class ProductListComponent implements OnInit {
   ngAfterViewInit() {
     Observable.fromEvent(this.input.nativeElement, 'keyup')
       .debounceTime(500)
-      .subscribe((e) => {
-        console.log(e.target.value);
+      .subscribe((e: any) => {
         this.search(e.target.value);
+
     })
   }
 
