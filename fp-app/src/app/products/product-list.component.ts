@@ -2,6 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Product} from '../models/Product';
 import {ProductService} from '../product.service';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-product-list',
@@ -39,8 +41,12 @@ export class ProductListComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    Observable.fromEvent(this.input.nativeElement, 'keyup').subscribe((e) => {
-      this.products = this.productService.searchProductByName(e.target.value);
+    Observable.fromEvent(this.input.nativeElement, 'keyup')
+      .debounceTime(500)
+      .subscribe((e) => {
+        console.log(e.target.value);
+      this.products = this.productService
+        .searchProductByName(e.target.value);
     })
   }
 

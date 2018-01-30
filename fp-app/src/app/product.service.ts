@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Product} from './models/Product';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ProductService {
+  private products$ = new Subject<Product[]>();
   private products: Product[] = [{
     id: 1,
     name: 'prod1',
@@ -27,12 +30,15 @@ export class ProductService {
 
   constructor() { }
 
-  getAllProducts(): Product[] {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.products$.asObservable();
+  }
+  getAllProducts() {
+    this.products$.next(this.products);
   }
 
-  searchProductByName(name: string): Product[] {
-    return this.products.filter(p => p.name.includes(name));
+  searchProductByName(name: string) {
+    this.products$.next(this.products.filter(p => p.name.includes(name)));
   }
 
 }
