@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Product} from './models/Product';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
@@ -27,7 +28,7 @@ export class ProductService {
     description:'descr4'
   }];
   private products$ = new BehaviorSubject<Product[]>(this.products);
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
     return this.products$.asObservable();

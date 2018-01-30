@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import { VatPipe } from './vat.pipe';
 import {ProductService} from './product.service';
 import { TestComponent } from './test/test.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TestComponent } from './test/test.component';
   ],
   imports: [
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
