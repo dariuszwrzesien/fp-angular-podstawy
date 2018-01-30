@@ -17,7 +17,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'products', component: ProductListComponent}
 ];
 
 @NgModule({
