@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../models/product';
+import {ProductService} from '../product.service';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime, map, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'fp-product-list',
-  template: `
+  template: `    
+    Sercz: <input class="form-control" #searchInput (input)="search(searchInput.value)"/>
     <fp-product-list-item *ngFor="let product of products"
       (productSell)="handleProductSell($event)"             
       [(expandedId)]="expandedId"
@@ -13,36 +18,37 @@ import {Product} from '../models/product';
 })
 export class ProductListComponent implements OnInit {
 
+  searchQuery$ = new Subject<string>();
   expandedId: number;
-  products: Product[] = [{
-    id:1,
-    price: 9.99,
-    description: 'prod decr1',
-    title: 'Product 1'
-  }, {
-    id:2,
-    price: 2.99,
-    description: 'prod decr2',
-    title: 'Product 2'
-  },{
-    id:3,
-    price: 3.99,
-    description: 'prod decr3',
-    title: 'Product 3'
-  },{
-    id:4,
-    price: 4.99,
-    description: 'prod decr4',
-    title: 'Product 4'
-  }];
+  products: Product[];
 
-  constructor() { }
+  constructor(private productService: ProductService) {
+    productService.getAllProducts().subscribe(
+      prod => this.products = prod
+    );
+    /*productService.getProductObservable().subscribe(
+      products => this.products = products
+    );
+    this.searchQuery$
+      .debounceTime(500)
+      .subscribe(title => console.log(title));*/
+    this.searchQuery$.pipe(
+      debounceTime(500),
+      switchMap(t => this.productService.searchProductByName(t))
+    ).subscribe(
+      p => this.products = p
+    )
+  }
 
   ngOnInit() {
   }
 
   handleProductSell(name: string){
     alert(name);
+  }
+
+  search(title: string) {
+    this.searchQuery$.next(title);
   }
 
 }

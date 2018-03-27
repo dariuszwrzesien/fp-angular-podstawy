@@ -8,6 +8,8 @@ import { ProductListComponent } from './products/product-list.component';
 import { ProductListItemComponent } from './products/product-list-item.component';
 import {FormsModule} from '@angular/forms';
 import { VatPipe } from './vat.pipe';
+import {ProductService} from './product.service';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,9 +22,10 @@ import { VatPipe } from './vat.pipe';
   ],
   imports: [
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
