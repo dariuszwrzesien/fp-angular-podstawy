@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
   selector: 'fp-product-list',
   template: `    
     Sercz: <input class="form-control" #searchInput (input)="search(searchInput.value)"/>
+    <button class="btn btn-danger" routerLink="/products/add">Add</button>
     <fp-product-list-item *ngFor="let product of products"
       (productSell)="handleProductSell($event)"             
       [(expandedId)]="expandedId"

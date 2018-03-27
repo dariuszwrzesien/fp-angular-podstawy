@@ -19,9 +19,8 @@ import {Product} from '../../../../product';
         <pre>{{product | json}}</pre>
       </div>
     </div>
-    <button 
-      (click)="sellProduct()"
-      class="btn btn-primary">Sprzedaj</button>'
+    <button [routerLink]="['/products', product.id, 'edit']"
+      class="btn btn-primary">Edit</button>'
     <input [(ngModel)]="product.price" #inputValue />
     {{inputValue.value}}
   `,
